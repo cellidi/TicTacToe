@@ -30,10 +30,7 @@ class Board extends Component {
     for (let index = 0; index < winLines.length; index++) {
       const [a, b, c] = winLines[index];
       if(this.state.board[a] && this.state.board[a] === this.state.board[b] && this.state.board[a] === this.state.board[c]) {
-        alert('You won');
-        this.setState({ winner: this.state.player }, () => {
-          //alert(this.state.player === 'X' ? 'You won' ! 'You loose');
-        })
+        this.setState({ winner: this.state.player });
       }
     }
   }
@@ -94,8 +91,14 @@ class Board extends Component {
   render() {
     const box = this.state.board.map((box, index) => <div className="Box" key={index} onClick={() => this.handleClick(index)}>{box}</div>)
     return (
-      <div className="Board">
-        {box}
+      <div>
+        <div className="Board">
+          {box}
+        </div>
+        <div className="WinnerText">
+          {this.state.winner === 'X' && <span><b>You are the Winner</b></span>}
+          {this.state.winner === 'O' && <span><b>You lost</b></span>}
+        </div>
       </div>
     );
   }
